@@ -15,12 +15,18 @@ export default class Items extends React.Component {
   render() {
     return <div>
       {this.items().map(
-        item => <Item item={item} key={item.get('id')} />
+        item =>
+          <Item
+            item={item}
+            onUpdate={this.props.onUpdate}
+            key={item.get('id')}
+          />
       )}
     </div>;
   }
 }
 
 Items.propTypes = {
-  items: React.PropTypes.object.isRequired
+  items: React.PropTypes.object.isRequired,
+  onUpdate: React.PropTypes.func.isRequired
 };

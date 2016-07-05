@@ -12,12 +12,24 @@ export default class App extends React.Component {
         {id: 2, title: 'Second', body: 'bla'}
       ])
     };
+
+    this.onUpdate = this.onUpdate.bind(this);
+  }
+
+  onUpdate(updated) {
+    this.setState({
+      items: this.items().map(item => item.get('id') === updated.get('id') ? updated : item)
+    });
+  }
+
+  items() {
+    return this.state.items;
   }
 
   render() {
     return <div className='container'>
       <h1>React Demo app</h1>
-      <Items items={this.state.items} />
+      <Items items={this.items()} onUpdate={this.onUpdate} />
     </div>;
   }
 }
