@@ -12,6 +12,7 @@ export default class ItemsContainer extends React.Component {
     };
 
     this.onUpdate = this.onUpdate.bind(this);
+    this.loadMore = this.loadMore.bind(this);
   }
 
   items() {
@@ -20,13 +21,25 @@ export default class ItemsContainer extends React.Component {
 
   onUpdate(updated) {
     ITEMS.save(updated);
+    this._updateState();
+  }
 
+  loadMore() {
+    ITEMS.loadMore();
+    this._updateState();
+  }
+
+  _updateState() {
     this.setState({
       items: ITEMS.getItems()
     });
   }
 
   render() {
-    return <Items items={this.items()} onUpdate={this.onUpdate}/>;
+    return <Items
+      items={this.items()}
+      onUpdate={this.onUpdate}
+      loadMore={this.loadMore}
+    />;
   }
 }

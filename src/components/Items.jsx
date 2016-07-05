@@ -22,11 +22,18 @@ export default class Items extends React.Component {
             key={item.get('id')}
           />
       )}
+
+      <div className='pull-right'>
+        <button className='btn btn-primary' onClick={this.props.loadMore}>
+          more...
+        </button>
+      </div>
     </div>;
   }
 }
 
 Items.propTypes = {
   items: React.PropTypes.object.isRequired,
-  onUpdate: React.PropTypes.func.isRequired
+  onUpdate: React.PropTypes.func.isRequired,
+  loadMore: React.PropTypes.func.isRequired
 };
