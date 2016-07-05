@@ -1,24 +1,25 @@
 import React from 'react';
-import {fromJS} from 'immutable';
 import Items from './Items';
+import ITEMS from '../models/items';
 
 export default class App extends React.Component {
   constructor() {
     super();
 
+    ITEMS.loadMore();
+
     this.state = {
-      items: fromJS([
-        {id: 1, title: 'First', body: 'bla'},
-        {id: 2, title: 'Second', body: 'bla'}
-      ])
+      items: ITEMS.getItems()
     };
 
     this.onUpdate = this.onUpdate.bind(this);
   }
 
   onUpdate(updated) {
+    ITEMS.save(updated);
+
     this.setState({
-      items: this.items().map(item => item.get('id') === updated.get('id') ? updated : item)
+      items: ITEMS.getItems()
     });
   }
 
